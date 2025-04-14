@@ -12,4 +12,8 @@ const randomIndex = Math.floor(Math.random() * USERS.length);
 })
 export class UserComponent {
   selectedUser = USERS[randomIndex];
+
+  get imageUrl() {
+    return `assets/users/${this.selectedUser.avatar}`;
+  }
 }
