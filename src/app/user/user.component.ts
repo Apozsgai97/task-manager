@@ -12,9 +12,11 @@ import {
   styleUrl: './user.component.css',
 })
 export class UserComponent {
-  @Input({ required: true }) id!:string;
-  @Input({ required: true }) avatar!: string;
-  @Input({ required: true }) name!: string;
+  @Input({ required: true }) user!:{
+    id: string;
+    avatar: string;
+    name: string;
+  };
   @Output() selected = new EventEmitter<string>();
 
   // avatar = input.required<string>();
@@ -22,12 +24,12 @@ export class UserComponent {
   // select = output<string>()
 
   get imageUrl() {
-    return `assets/users/${this.avatar}`;
+    return `assets/users/${this.user.avatar}`;
   }
 
   // imageUrl = computed(() => `assets/users/${this.avatar()}`);
 
   onSelectUser() {
-    this.selected.emit(this.id);
+    this.selected.emit(this.user.id);
   }
 }
