@@ -9,5 +9,5 @@
       <app-user [id]="users[1].id" [avatar]="users[1].avatar" [name]="users[1].name" (selected)="onSelectUser($event)"/>
     </li>
   </ul>
-<app-tasks [name]="selectedUserName"/>
+<app-tasks [name]="selectedUserName ? selectedUserName : '' "/>
 </main>
