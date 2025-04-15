@@ -12,4 +12,7 @@ import { USERS } from './users';
 })
 export class AppComponent {
   users = USERS;
+  onSelectUser(id: string) {
+    console.log('Selected user id:', id);
+  }
 }
