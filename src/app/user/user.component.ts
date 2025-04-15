@@ -9,7 +9,8 @@ import { User } from './user.model';
 })
 export class UserComponent {
   @Input({ required: true }) user!: User;
-  @Output() selected = new EventEmitter<string>();
+  @Input({ required: true }) selected!: boolean;
+  @Output() select = new EventEmitter<string>();
 
   // avatar = input.required<string>();
   // name = input.required<string>();
@@ -22,6 +23,6 @@ export class UserComponent {
   // imageUrl = computed(() => `assets/users/${this.avatar()}`);
 
   onSelectUser() {
-    this.selected.emit(this.user.id);
+    this.select.emit(this.user.id);
   }
 }
