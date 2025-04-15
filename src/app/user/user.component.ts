@@ -1,9 +1,11 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+
+type User = {
+  id: string;
+  avatar: string;
+  name: string;
+};
+
 @Component({
   selector: 'app-user',
   standalone: true,
@@ -12,11 +14,7 @@ import {
   styleUrl: './user.component.css',
 })
 export class UserComponent {
-  @Input({ required: true }) user!:{
-    id: string;
-    avatar: string;
-    name: string;
-  };
+  @Input({ required: true }) user!: User;
   @Output() selected = new EventEmitter<string>();
 
   // avatar = input.required<string>();
