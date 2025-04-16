@@ -1,19 +1,21 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Task } from './task.model';
-import { CardComponent } from "../../shared/card/card.component";
+import { CardComponent } from '../../shared/card/card.component';
 import { DatePipe } from '@angular/common';
+import { TaskService } from '../tasks.service';
 @Component({
   selector: 'app-task',
   standalone: true,
   imports: [CardComponent, DatePipe],
   templateUrl: './task.component.html',
-  styleUrl: './task.component.css'
+  styleUrl: './task.component.css',
 })
 export class TaskComponent {
-@Input({required: true}) task!: Task;
-@Output() complete = new EventEmitter<string>();
+  @Input({ required: true }) task!: Task;
 
-onCompleteTask() {
-    this.complete.emit(this.task.id);
+  constructor(private taskService: TaskService) {}
+
+  onCompleteTask() {
+    this.taskService.completeTask(this.task.id);
   }
 }
