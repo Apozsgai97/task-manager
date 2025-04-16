@@ -1,33 +1,35 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { TaskData } from '../task/task.model';
+import { TaskService } from '../tasks.service';
 
 @Component({
   selector: 'app-new-task',
   standalone: true,
   imports: [FormsModule],
   templateUrl: './new-task.component.html',
-  styleUrl: './new-task.component.css'
+  styleUrl: './new-task.component.css',
 })
 export class NewTaskComponent {
- @Output() cancelTask = new EventEmitter<void>();
- @Output() createTask = new EventEmitter<TaskData>();
+  @Input ({ required: true }) userId!: string;
+  @Output() closeTask = new EventEmitter<void>();
 
- enteredTitle = '';
- enteredSummary = '';
- enteredDueDate = '';
- //enteredTitle = signal('');
+  constructor(private taskService: TaskService) {}
 
-  onCancelTask(){
-    this.cancelTask.emit();
+  enteredTitle = '';
+  enteredSummary = '';
+  enteredDueDate = '';
+  //enteredTitle = signal('');
+
+  onClose() {
+    this.closeTask.emit();
   }
 
   onSubmitTask() {
-    this.createTask.emit({
+    this.taskService.addTask(this.userId, {
       title: this.enteredTitle,
       summary: this.enteredSummary,
       dueDate: this.enteredDueDate,
     });
+    this.closeTask.emit();
   }
-
 }

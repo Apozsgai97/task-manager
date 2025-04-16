@@ -32,8 +32,4 @@ export class TasksComponent {
   onCancelAddTask() {
     this.isAddingTask = false;
   }
-  onAddTask(taskData: TaskData) {
-    this.taskService.addTask(this.userId, taskData);
-    this.isAddingTask = false;
-  }
 }
